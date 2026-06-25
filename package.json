@@ -6,7 +6,8 @@
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    "seed": "ts-node src/utils/seedData.ts"
+    "seed": "ts-node src/utils/seedData.ts",
+    "reseed": "ts-node src/utils/reseed.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
