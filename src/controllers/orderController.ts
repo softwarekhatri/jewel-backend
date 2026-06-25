@@ -2,6 +2,7 @@ import { Response } from 'express';
 import Order from '../models/Order';
 import Product from '../models/Product';
 import { AuthRequest } from '../middleware/auth';
+import { sendOrderConfirmationEmail } from '../utils/email';
 
 export const createOrder = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
@@ -45,6 +46,16 @@ export const createOrder = async (req: AuthRequest, res: Response): Promise<void
       totalAmount,
       orderNotes,
     });
+
+    const user = req.user!;
+    sendOrderConfirmationEmail(
+      user.email,
+      user.name,
+      order._id.toString(),
+      orderItems.map((i) => ({ name: i.name, quantity: i.quantity, price: i.price })),
+      totalAmount,
+      shippingAddress
+    ).catch((err) => console.error('Order confirmation email failed:', err));
 
     res.status(201).json({ success: true, order });
   } catch (error: unknown) {
