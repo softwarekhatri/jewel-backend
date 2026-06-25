@@ -26,6 +26,7 @@ app.use(
       process.env.CLIENT_URL || "http://localhost:3000",
       "http://localhost:3001",
       "https://jewelRocx-frontend.vercel.app",
+      "https://jewelrocx-khatri.vercel.app",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
